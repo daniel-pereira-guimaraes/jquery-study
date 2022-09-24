@@ -1,0 +1,85 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+	$(function() {
+
+		$("#buttonOcultarTitulo").click(function() {
+			$('h1').hide();
+		});
+
+		$("#buttonExibirTitulo").click(function() {
+			$('h1').show();
+		});
+
+		$("#buttonCorTitulo").click(function() {
+			$("h2").css("color", "red");
+		});
+		
+		$("#buttonAzul").click(() => $("p").css("color", "blue"));
+		$("#buttonVermelho").click(() => $("p").css("color", "red"));
+		
+	});
+</script>
+<style>
+	body {
+		font-family: Tahoma, Verdana, sans-serif;
+		font-size: 14pt;
+	}
+	
+	h1 {
+		margin: 0 0 20px;
+		padding: 0;
+	}
+
+	h2 {
+		margin: 0 0 15px;
+		padding: 0;
+	}
+	
+	p {
+		margin: 0 0 10px;
+		padding: 0;
+	}
+	
+	button {
+		min-width: 100px;
+		padding: 5px;
+		border: 1px solid gray;
+		border-radius: 5px;
+		font-size: 12pt;
+	}
+	
+	#content {
+		width: 700px;
+		margin: 10px auto;
+		background-color: gainsboro;
+		padding: 15px;
+	}
+	
+	#buttons {
+		display: flex;
+		flex-direction: row;
+		margin: 20px 0 0;
+		gap: 10px;
+	}
+	
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>jQuery</h1>
+		<h2>Primeiros passos</h2>
+		<p id="azul">Primeira mensagem.</p>
+		<p id="vermelho">Segunda mensagem.</p>
+		<div id="buttons">
+			<button id="buttonOcultarTitulo">Ocultar o título</button><br/>
+			<button id="buttonExibirTitulo">Exibir o título</button><br/>
+			<button id="buttonCorTitulo">Alterar a cor do título</button><br/>
+			<button id="buttonAzul">Azul</button><br/>
+			<button id="buttonVermelho">Vermelho</button><br/>
+		</div>
+	</div>
+	
+</body>
+</html>
