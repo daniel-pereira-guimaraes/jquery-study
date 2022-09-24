@@ -4,20 +4,20 @@
 <script>
 	$(function() {
 
-		$("#buttonOcultarTitulo").click(function() {
+		$("#btnHideTitle").click(function() {
 			$('h1').hide();
 		});
 
-		$("#buttonExibirTitulo").click(function() {
+		$("#btnShowTitle").click(function() {
 			$('h1').show();
 		});
 
-		$("#buttonCorTitulo").click(function() {
-			$("h2").css("color", "red");
+		$("#btnTitleColor").click(function() {
+			$("h1").css("color", "green");
 		});
 		
-		$("#buttonAzul").click(() => $("p").css("color", "blue"));
-		$("#buttonVermelho").click(() => $("p").css("color", "red"));
+		$("#btnBlue").click(() => $("p").css("color", "blue"));
+		$("#btnRed").click(() => $("p").css("color", "red"));
 		
 	});
 </script>
@@ -69,15 +69,15 @@
 <body>
 	<div id="content">
 		<h1>jQuery</h1>
-		<h2>Primeiros passos</h2>
-		<p id="azul">Primeira mensagem.</p>
-		<p id="vermelho">Segunda mensagem.</p>
+		<h2>Firsts steps</h2>
+		<p id="blue">First message.</p>
+		<p id="red">Second message.</p>
 		<div id="buttons">
-			<button id="buttonOcultarTitulo">Ocultar o título</button><br/>
-			<button id="buttonExibirTitulo">Exibir o título</button><br/>
-			<button id="buttonCorTitulo">Alterar a cor do título</button><br/>
-			<button id="buttonAzul">Azul</button><br/>
-			<button id="buttonVermelho">Vermelho</button><br/>
+			<button id="btnHideTitle">Hide title</button><br/>
+			<button id="btnShowTitle">Show title</button><br/>
+			<button id="btnTitleColor">Change title color</button><br/>
+			<button id="btnBlue">Blue</button><br/>
+			<button id="btnRed">Red</button><br/>
 		</div>
 	</div>
 	
