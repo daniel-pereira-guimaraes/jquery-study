@@ -1,30 +1,10 @@
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script>
-	$(function() {
-
-		$("#btnHideTitle").click(function() {
-			$('h1').hide();
-		});
-
-		$("#btnShowTitle").click(function() {
-			$('h1').show();
-		});
-
-		$("#btnTitleColor").click(function() {
-			$("h1").css("color", "green");
-		});
-		
-		$("#btnBlue").click(() => $("p").css("color", "blue"));
-		$("#btnRed").click(() => $("p").css("color", "red"));
-		
-	});
-</script>
 <style>
 	body {
 		font-family: Tahoma, Verdana, sans-serif;
 		font-size: 14pt;
+		text-align: center;
 	}
 	
 	h1 {
@@ -50,35 +30,174 @@
 		font-size: 12pt;
 	}
 	
+	button:hover {
+		background-color: lightblue;
+		cursor: pointer;
+	}
+	
 	#content {
 		width: 700px;
 		margin: 10px auto;
 		background-color: gainsboro;
-		padding: 15px;
+		padding: 20px 20px 5px;
+		border: 1px solid gray;
+		border-radius: 10px;
+	}
+	
+	#title {
+		height: 70px;
 	}
 	
 	#buttons {
 		display: flex;
 		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
 		margin: 20px 0 0;
 		gap: 10px;
 	}
 	
+	#divMsg {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 80px;
+	}
+	
+	#div-circle {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 20px;
+	}
+	
+	#colored-circle {
+		border-left: 5px solid blue;
+		border-top: 5px solid red;
+		border-right: 5px solid orange;
+		border-bottom: 5px solid green;
+		border-radius: 50%;
+		width: 50px;
+		height: 50px;
+	}
+	
+	.rotate {
+		animation: rotation 2s infinite linear;
+	}
+	
+	@keyframes rotation {
+		from { transform: rotate(0deg); }
+		to { transform: rotate(359deg); }
+	}
+	
+	#author {
+		background: rgb(200,200,200);
+		color: rgb(50,50,50);
+		font-style: italic;
+		font-size: 10pt;
+		border: 1px solid gray;
+		border-radius: 5px;
+		padding: 5px;
+	}
+	
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+	var rotateActive = false;
+
+	$(function() {
+
+		$("#btnHideTitle").click(function() {
+			$('h1').hide();
+		});
+
+		$("#btnShowTitle").click(function() {
+			$('h1').show();
+		});
+
+		$("#btnTitleColor").click(function() {
+			$("h1").css("color", "green");
+		});
+		
+		$("#btnBlue").click(() => $("p").css("color", "blue"));
+		$("#btnRed").click(() => $("p").css("color", "red"));
+		
+		$("#btnFadeOut").click(() => $("h1").fadeOut(1000));
+		$("#btnFadeIn").click(() => $("h1").fadeIn(1000));
+		
+		$("#btnFadeOutIn").click(() => {
+			$("h1").fadeOut(500).delay(200).fadeIn(500);
+		});
+		
+		$("#btnSlideUp").click(() => $("h1").slideUp(400).delay(500).fadeIn(400));
+		
+		$("#btnToast").click(() => {
+			$("#msg")
+				.css("color", "red")
+				.css("border", "1px solid red")
+				.css("border-radius", "5px")
+				.css("padding", "5px 10px")
+				.css("background-color", "lightyellow")
+				.text("Alô mundo!")
+				.fadeIn(500)
+				.delay(2000)
+				.fadeOut(500);
+		});
+		
+		$("#btnRotate").click(() => {
+			rotateActive = !rotateActive;
+			if (rotateActive)
+				$("#colored-circle").addClass("rotate");
+			else
+				$("#colored-circle").removeClass("rotate");
+		});
+
+		// API access example!
+		$("#btnApiAccess").click(() => {
+			$.getJSON("https://jsonplaceholder.typicode.com/users", (data) => {
+				console.log(data);
+				alert("Data loaded. See console.");
+			})
+			.done(() => console.log("getJSON succes!"))
+			.fail(() => alert("Error loading data!"))
+			.always(() => console.log("getJSON complete."));
+		});
+		
+	});
+</script>
 </head>
 <body>
 	<div id="content">
-		<h1>jQuery</h1>
+		<div id="title">
+			<h1>jQuery</h1>
+		</div>
 		<h2>Firsts steps</h2>
 		<p id="blue">First message.</p>
 		<p id="red">Second message.</p>
+		<div id="div-circle">
+			<div id="colored-circle"></div>
+		</div>
 		<div id="buttons">
 			<button id="btnHideTitle">Hide title</button><br/>
 			<button id="btnShowTitle">Show title</button><br/>
 			<button id="btnTitleColor">Change title color</button><br/>
 			<button id="btnBlue">Blue</button><br/>
 			<button id="btnRed">Red</button><br/>
+			<button id="btnFadeOut">Fade out</button><br/>
+			<button id="btnFadeIn">Fade in</button><br/>
+			<button id="btnFadeOutIn">Fade out/in</button><br/>
+			<button id="btnSlideUp">Slide up</button><br/>
+			<button id="btnToast">Toast</button><br/>
+			<button id="btnRotate">Rotate</button><br/>
+			<button id="btnApiAccess">API access</button><br/>
 		</div>
+		<div id="divMsg">
+			<p id="msg"></p>
+		</div>
+		<footer>
+			<p id="author">By Daniel Pereira Guimarães</p>
+		</footer>
 	</div>
 	
 </body>
