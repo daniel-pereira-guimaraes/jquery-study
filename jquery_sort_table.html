@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+	<title>Sort table using jQuery</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Daniel Pereira Guimarães">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		function defaultComparer(value1, value2) {
+			return value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+		}
+		
+		function stringComparer(value1, value2) {
+			return defaultComparer(value1.toUpperCase(), value2.toUpperCase());
+		}
+		
+		function numberComparer(value1, value2) {
+			return defaultComparer(Number(value1), Number(value2));
+		}
+	
+		function sortTable(table, colIndex, comparer, ascending) {
+			if (typeof comparer !== "function")
+				comparer = stringComparer;
+			const tbody = table.find("tbody");
+			const rows = tbody.find("tr");
+			rows.sort(function(row1, row2) {
+				let value1 = $(row1).children("td").eq(colIndex).text();
+				let value2 = $(row2).children("td").eq(colIndex).text();
+				return comparer(value1, value2) * (ascending ? 1 : -1);
+			});
+			rows.each(function(index, row) {
+				tbody.append(row);
+			});
+		}
+		
+		function sorterTableClick(sorter, tableId, comparer) {
+			const table = $("#" + tableId);
+			if (table) {
+				sorter = $(sorter);
+				let column = sorter;
+				while (column && !column.is("th") && !column.is("td"))
+					column = column.parent();
+				if (column) {
+					const ascending = sorter.hasClass("ascending");
+					if (ascending) {
+						sorter.removeClass("ascending");
+					} else {
+						sorter.addClass("ascending");
+					}
+					sortTable(table, column.index(), comparer, ascending);
+				}
+			}
+		}
+	</script>
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			width: 750px;
+			margin: 0 auto;
+			font-family: Helvetica, Tahoma, sans-serif;
+			color: navy;
+		}
+		
+		h1 {
+			text-align: center;
+		}
+		
+		table {
+			border-collapse: collapse;
+		}
+
+		td, th {
+			padding: 4px;
+			border: 1px solid navy;
+		}
+		
+		thead {
+			background-color: CornflowerBlue;
+			color: white;
+			font-weight: bold;
+			text-align: center;
+		}
+		
+		thead th {
+			cursor: pointer;
+		}
+
+		thead th::after {
+			margin-left: 5px;
+			content: "\2B0D";
+		}
+		
+		tfoot {
+			background-color: LightSkyBlue;
+			font-style: italic;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Sorting table using jQuery</h1>
+	<table id="myTable">
+		<thead>
+			<tr>
+				<th onclick="sorterTableClick(this, 'myTable', numberComparer)">ID</th>
+				<th onclick="sorterTableClick(this, 'myTable')">Name</th>
+				<th onclick="sorterTableClick(this, 'myTable')">Telephone</th>
+				<th onclick="sorterTableClick(this, 'myTable')">E-mail</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>123</td>
+				<td>Jhon</td>
+				<td>1234-4567</td>
+				<td>jhon@server.com</td>
+			</tr>
+			<tr>
+				<td>456</td>
+				<td>Emma</td>
+				<td>4567-8963</td>
+				<td>emma@server.com</td>
+			</tr>
+			<tr>
+				<td>789</td>
+				<td>Oliver</td>
+				<td>1122-3344</td>
+				<td>oliver@otherserver.com</td>
+			</tr>
+			<tr>
+				<td>1000</td>
+				<td>Sophia</td>
+				<td>2233-4455</td>
+				<td>sophia@server.com</td>
+			</tr>
+			<tr>
+				<td>159</td>
+				<td>George</td>
+				<td>3344-5566</td>
+				<td>george@otherserver.com</td>
+			</tr>
+			<tr>
+				<td>40</td>
+				<td>James</td>
+				<td>4455-6677</td>
+				<td>james@server.com</td>
+			</tr>
+			<tr>
+				<td>321</td>
+				<td>Amelia</td>
+				<td>5566-7788</td>
+				<td>amelia@server.com</td>
+			</tr>
+			<tr>
+				<td>654</td>
+				<td>Willian</td>
+				<td>6677-8899</td>
+				<td>willian@otherserver.com</td>
+			</tr>
+			<tr>
+				<td>987</td>
+				<td>Olivia</td>
+				<td>7412-5896</td>
+				<td>olivia@server.com</td>
+			</tr>
+
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4">By Daniel Pereira Guimarães</td>
+			</tr>
+		</tfoot>
+	</table>
+
+</body>
+</html>
