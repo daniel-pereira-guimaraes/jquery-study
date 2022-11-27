@@ -1,0 +1,137 @@
+<html>
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+	<title>Expanding and collapsing with jQuery</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Daniel Pereira Guimarães">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		function expandButtonClick(button) {
+			button = $(button);
+			const header = $("#header");
+			const headerBar = $("#headerBar");
+			const headerDetail = $("#headerDetail");
+			const minHeight = headerBar.outerHeight() + header.outerHeight() - header.innerHeight();
+			const maxHeight = minHeight + headerDetail.outerHeight();
+			if (expandButtonClick.hide) {
+				button.text("+");
+				header.animate({height: minHeight}, 200);
+			} else {
+				button.text("-");
+				header.animate({height: maxHeight}, 200);
+				headerDetail.show();
+			}
+			expandButtonClick.hide = !expandButtonClick.hide;
+		}
+	</script>
+	<style>
+		body {
+			font-family: Helvetica, Tahoma, sans-serif;
+			font-size: 18px;
+		}
+		
+		a {
+			text-decoration: none;
+		}
+		
+		#main {
+			display: flex;
+			flex-direction: column;
+			width: 1000px;
+			max-width: 90%;
+			height: 90%;
+			margin: 20px auto;
+			background: DeepSkyBlue;
+			border: 1px solid DodgerBlue;
+			border-radius: 5px;
+			padding: 10px;
+		}
+		
+		#header {
+			box-sizing: border-box;
+			background: LightBlue;
+			border: 1px solid DodgerBlue;
+			border-radius: 5px;
+			overflow: hidden; 
+		}
+		
+		#headerBar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 5px 10px;
+		}
+		
+		#headerBar p {
+			margin: 0;
+			padding: 0;
+			font-weight: bold;
+		}
+		
+		#headerBar button {
+			width: 25px;
+			height: 25px;
+			background: DeepSkyBlue;
+			border: 1px solid DodgerBlue;
+			border-radius: 50%;
+			cursor: pointer;
+			font-size: 20px;
+			font-weight: bold;
+		}
+
+		#headerDetail ul{
+			margin: 0;
+			padding: 10px 0 10px 30px;
+		}
+		
+		#client {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: Azure;
+			border: 1px solid DodgerBlue;
+			border-radius: 5px;
+			margin: 10px 0;
+			padding: 10px;
+			flex-grow: 1; /* 100% of the free area! */
+		}
+		
+		#footer {
+			background: LightBlue;
+			border: 1px solid DodgerBlue;
+			border-radius: 5px;
+			padding: 5px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div id="header">
+			<div id="headerBar">
+				<p>Expanding and collapsing with jQuery</p>
+				<button onclick="expandButtonClick(this)">+</button>
+			</div>
+			<div id="headerDetail" style="display: none">
+				<ul>
+					<li>One</li>
+					<li>Two</li>
+					<li>Three</li>
+					<li>Four</li>
+					<li>Five</li>
+				</ul>
+			</div>
+		</div>
+		<div id="client">
+			<p>Client area!</p>
+		</div>
+		<div id="footer">
+			<a href="https://github.com/daniel-pereira-guimaraes">
+				By Daniel Pereira Guimarães
+			</a>
+		</div>
+	</div>
+</body>
+</html>
